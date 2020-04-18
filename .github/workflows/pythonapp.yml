@@ -52,7 +52,7 @@ jobs:
       - name: Check for dependency security
         run: |
           poetry export -f requirements.txt > requirements.txt
-          safety check -r requirements.txt
+          poetry run safety check -r requirements.txt
 
       - name: Test with pytest
         run: poetry run pytest
