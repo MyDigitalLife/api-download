@@ -49,6 +49,9 @@ jobs:
       - name: Check types statically
         run: poetry run mypy . --strict
 
+      - name: Install mongodb
+        run: sudo docker run --name mongo -d -p 27017:27017 mongo
+
       - name: Check for dependency security
         run: |
           poetry export -f requirements.txt > requirements.txt
@@ -57,7 +60,7 @@ jobs:
       - name: Test with pytest
         run: poetry run pytest
         env:
-          MONGO_URI: ${{ secrets.MongoUri }}
+          MONGO_URI: mongodb://localhost:27017
           FLASK_ENV: testing
 
       - name: Log in to GitHub Packages
