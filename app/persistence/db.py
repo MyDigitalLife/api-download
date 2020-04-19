@@ -1,3 +1,4 @@
+import typing
 from flask import Flask
 from flask_pymongo import PyMongo  # type: ignore
 from datetime import datetime, timedelta
@@ -11,8 +12,8 @@ mongo = PyMongo()
 
 
 def get_cases(
-    uuid: UUID, lat: Optional[int] = None, lon: Optional[int] = None
-) -> Iterator[Any]:
+        uuid: UUID, lat: Optional[int] = None, lon: Optional[int] = None
+) -> typing.List[Any]:
     # TODO: prevent timing attacks that could reveal if a UUID is present or not
     conditions: Dict[str, Any] = {}
     if lat is not None:
