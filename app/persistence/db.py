@@ -12,7 +12,7 @@ mongo = PyMongo()
 
 
 def get_cases(
-        uuid: UUID, lat: Optional[int] = None, lon: Optional[int] = None
+    uuid: UUID, lat: Optional[int] = None, lon: Optional[int] = None
 ) -> typing.List[Any]:
     # TODO: prevent timing attacks that could reveal if a UUID is present or not
     conditions: Dict[str, Any] = {}
