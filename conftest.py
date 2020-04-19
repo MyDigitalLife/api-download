@@ -12,6 +12,6 @@ def app() -> Flask:
 
 @pytest.fixture
 def client(app):
-    app.config['TESTING'] = True
+    app.config["TESTING"] = True
     with app.test_client() as client:
         yield client
