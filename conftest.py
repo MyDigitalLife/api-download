@@ -1,5 +1,9 @@
+from tokenize import String
+
 from flask import Flask
 import pytest  # type: ignore
+from flask.testing import FlaskClient
+from werkzeug import Client
 
 from app import create_app
 
@@ -11,7 +15,7 @@ def app() -> Flask:
 
 
 @pytest.fixture
-def client(app):
+def client(app) -> FlaskClient:
     app.config["TESTING"] = True
     with app.test_client() as client:
         yield client
