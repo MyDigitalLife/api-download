@@ -5,12 +5,13 @@ name: Build
 
 on:
   push:
-    branches: [master]
+    branches:
+      - "*"
   pull_request:
     branches: [master]
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
 
     steps:
@@ -65,11 +66,7 @@ jobs:
 
       - name: Log in to GitHub Packages
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository }} --password-stdin
-        
+
       - name: Build the Docker image
         if: success()
         run: docker build . --file Dockerfile --tag docker.pkg.github.com/ito-org/api-download/api-download:latest
-        
-      - name: Publish the Docker image on GitHub Packages
-        if: success()
-        run: docker push docker.pkg.github.com/ito-org/api-download/api-download:latest
